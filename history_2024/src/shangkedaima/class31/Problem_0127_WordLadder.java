@@ -1,11 +1,6 @@
 package shangkedaima.class31;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Problem_0127_WordLadder {
 

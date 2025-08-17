@@ -5,10 +5,10 @@ package shangkedaima.class18;
 // 不要提交包信息，把import底下的类名改成Main，提交下面的代码可以直接通过
 // 因为测试平台会卡空间，所以把set换成了动态加和减的结构
 
-import java.util.Scanner;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Code04_TopKSumCrossTwoArrays {
 

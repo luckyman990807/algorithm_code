@@ -1,11 +1,7 @@
 package shangkedaima.class04;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 // 本题测试链接 : https://leetcode.com/problems/the-skyline-problem/
 public class Code08_TheSkylineProblem {

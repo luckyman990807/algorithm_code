@@ -1,10 +1,6 @@
 package shangkedaima.class10;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 // 本题测试链接：https://www.lintcode.com/problem/top-k-frequent-words-ii/
 // 以上的代码不要粘贴, 把以下的代码粘贴进java环境编辑器
