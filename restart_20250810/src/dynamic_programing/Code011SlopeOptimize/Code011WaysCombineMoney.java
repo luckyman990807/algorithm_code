@@ -1,4 +1,4 @@
-package dynamic_programing;
+package dynamic_programing.Code011SlopeOptimize;
 
 /**
  * 拼凑货币的方法数
