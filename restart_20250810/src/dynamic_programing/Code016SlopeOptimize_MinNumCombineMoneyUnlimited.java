@@ -83,7 +83,8 @@ public class Code016SlopeOptimize_MinNumCombineMoneyUnlimited {
                 // 举个例子，假设index=2，面额=3，restAim=10，
                 // 根据位置依赖关系，dp[2][10]=min(0+dp[3][10], 1+dp[3][7], 2+dp[3][4], 3+dp[3][1])
                 // 而观察相邻位置发现，同样根据位置依赖关系，dp[2][7]=min(0+dp[3][7], 1+dp[3][4], 2+dp[3][1])
-                // 等式两边都+1得：dp[2][7]=min(0+dp[3][7], 1+dp[3][4], 2+dp[3][1])
+                // 等式两边都+1得：1+dp[2][7]=min(1+dp[3][7], 2+dp[3][4], 3+dp[3][1])
+                // 带入dp[2][10]的依赖关系可得：dp[2][10]=min(0+dp[3][10], 1+dp[2][7])
                 dp[index][restAim] = Math.min(
                         dp[index + 1][restAim],
                         restAim - money[index] >= 0 && dp[index][restAim - money[index]] != Integer.MAX_VALUE ?
