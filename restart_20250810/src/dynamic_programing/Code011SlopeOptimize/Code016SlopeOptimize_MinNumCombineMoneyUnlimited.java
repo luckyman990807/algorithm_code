@@ -1,4 +1,4 @@
-package dynamic_programing;
+package dynamic_programing.Code011SlopeOptimize;
 
 /**
  * 给定正数无重复数组arr，每个值表示一种面额，给定正数aim，求组成aim的最小张数
