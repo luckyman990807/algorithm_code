@@ -13,10 +13,13 @@ import java.util.Map;
 public class Code005TickersToSpellWord {
     /**
      * 解法一阶段：暴力递归
-     * 思路：面对目标单词，第一种可能性：上来先用第一种贴纸去抵消掉一部分目标字符，剩下的部分交给下一轮，计算所需要的最少贴纸数；
+     * 思路：面对目标单词，第一种可能性：上来先用第一种贴纸去抵消掉一部分目标字符，剩下的部分递归交给下一轮去抵消，拿到剩余部分抵消所需要的最少贴纸数；
      * 第二种可能性：上来先用第二种贴纸去抵消……
      * 第n种可能性：上来先用第n种贴纸去抵消……
-     * 取最小值
+     * 最后选取使用贴纸最少的可能性
+     *
+     * 怎么抵消：
+     * 记录下贴纸的每个字母的词频，记录下目标单词的每个字母的词频，从目标单词的词频中减去贴纸的词频
      *
      * @param stickers
      * @param target
@@ -72,7 +75,14 @@ public class Code005TickersToSpellWord {
         return min;
     }
 
+    /**
+     * 解法第二阶段：预处理贴纸字符数组+剪枝
+     * @param stickers
+     * @param target
+     * @return
+     */
     public static int forcePreCharArrAndBranchPruning(String[] stickers, String target) {
+        // 提前转换好每张贴纸的字符数组，避免重复转换
         char[][] stickersCharArr = new char[stickers.length][];
         for (int i = 0; i < stickers.length; i++) {
             stickersCharArr[i] = stickers[i].toCharArray();
@@ -82,6 +92,12 @@ public class Code005TickersToSpellWord {
         return min == Integer.MAX_VALUE ? -1 : min;
     }
 
+    /**
+     * 剪枝版递归process
+     * @param stickers
+     * @param target
+     * @return
+     */
     public static int processBranchPruning(char[][] stickers, char[] target) {
         if (target.length == 0) {
             return 0;
@@ -93,6 +109,9 @@ public class Code005TickersToSpellWord {
             for (char c : sticker) {
                 stickerWords[c - 'a']++;
             }
+            // 如果当前贴纸不包含目标单词的首字母，那么直接砍掉这一枝的尝试
+            // 为什么？首字母总会在某次尝试中被消除掉的，那我就指定为这次，某个字母先消还是后消不影响结果。
+            // 这里剪枝的好处是能够限制本次使用的贴纸一定是能抵消的，不会混进来那种没用的没法做任何抵消的贴纸
             if (stickerWords[target[0] - 'a'] <= 0) {
                 continue;
             }
@@ -128,9 +147,9 @@ public class Code005TickersToSpellWord {
     }
 
 
-    public static int dp(String[] stickers, String tatger) {
+    public static int dp(String[] stickers, String target) {
         Map<String, Integer> dp = new HashMap<>();
-        int min = processDp(stickers, tatger, dp);
+        int min = processDp(stickers, target, dp);
         return min == Integer.MAX_VALUE ? -1 : min;
     }
 
