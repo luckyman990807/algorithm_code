@@ -1,6 +1,5 @@
 package dynamic_programing;
 
-import tixiban.class1_13.笔记.排序;
 
 /**
  * 给定一个集合，拆分成两个子集，要求两个子集的长度和累加和都最接近，返回其中较小的累加和
