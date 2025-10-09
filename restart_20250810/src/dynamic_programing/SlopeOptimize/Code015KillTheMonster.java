@@ -1,4 +1,4 @@
-package dynamic_programing.Code011SlopeOptimize;
+package dynamic_programing.SlopeOptimize;
 
 /**
  * 给定3个参数n，m，k

@@ -1,8 +1,7 @@
-package dynamic_programing.Code011SlopeOptimize;
+package dynamic_programing.SlopeOptimize;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * 给定一个money数组，每个值表示一张货币，相同的值表示有多张相同的货。给定一个正数aim，求组成aim的方法数

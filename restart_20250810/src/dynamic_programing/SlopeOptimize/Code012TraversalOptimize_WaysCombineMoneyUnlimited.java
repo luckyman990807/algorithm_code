@@ -1,4 +1,4 @@
-package dynamic_programing.Code011SlopeOptimize;
+package dynamic_programing.SlopeOptimize;
 
 /**
  * 遍历优化案例：组成aim的方法数，每个面额的货币无限张

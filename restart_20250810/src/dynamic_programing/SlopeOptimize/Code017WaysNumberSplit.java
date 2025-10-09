@@ -1,4 +1,4 @@
-package dynamic_programing.Code011SlopeOptimize;
+package dynamic_programing.SlopeOptimize;
 
 /**
  * 整数拆分问题
