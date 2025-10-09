@@ -16,7 +16,7 @@ public class Code016SlopeOptimize_MinNumCombineMoneyUnlimited {
 
     public static int process(int[] money, int index, int restAim) {
         // 边界条件
-        // 不需要判断restAim<0，因为穷举可能性的时候限制了张数，不会让restAim减到<0
+        // 不需要判断restAim<0，因为枚举可能性的时候限制了张数，不会让restAim减到<0
         // 如果所有货币都尝试完了，只有当恰好凑齐aim时，才算找到了一种方法，这种方法当前阶段（凑齐0元）所需最少张数为0；否则是无效方法
         if (index == money.length) {
             return restAim == 0 ? 0 : Integer.MAX_VALUE;
@@ -24,7 +24,7 @@ public class Code016SlopeOptimize_MinNumCombineMoneyUnlimited {
 
         int min = Integer.MAX_VALUE;
         for (int num = 0; num * money[index] <= restAim; num++) {
-            // 穷举所有可能的张数，比较出有效且最小值
+            // 枚举所有可能的张数，比较出有效且最小值
             int next = process(money, index + 1, restAim - num * money[index]);
             if (next != Integer.MAX_VALUE) {
                 min = Math.min(min, next + num);

@@ -5,7 +5,7 @@ package dynamic_programing.SlopeOptimize;
  * 怪兽有n滴血，每次攻击会让怪兽掉[0,m]滴血，求k次攻击之后怪兽被打死的概率
  *
  * 思路：
- * 穷举可能性，斜率优化
+ * 枚举可能性，斜率优化
  * 概率 = k次攻击后怪被杀死的情况数 / k次攻击的所有情况数
  */
 public class Code015KillTheMonster {
@@ -38,7 +38,7 @@ public class Code015KillTheMonster {
             return (int) Math.pow(damageRange + 1, restTimes);
         }
 
-        // 罗列可能性，穷举所有可能的伤害值
+        // 罗列可能性，枚举所有可能的伤害值
         int ways = 0;
         for (int damage = 0; damage <= damageRange; damage++) {
             ways += process(restHp - damage, damageRange, restTimes - 1);

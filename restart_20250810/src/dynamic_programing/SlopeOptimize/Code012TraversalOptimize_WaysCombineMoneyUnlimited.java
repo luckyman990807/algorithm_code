@@ -4,9 +4,9 @@ package dynamic_programing.SlopeOptimize;
  * 遍历优化案例：组成aim的方法数，每个面额的货币无限张
  * 给定一个正数数组表示货币面额，每个面额的货币有无限张，给定一个正数aim，求用货币组成aim的方法数
  *
- * 思路：由于每个面额的货币有无限张，因此尝试时每张货币需要穷举出所有可能的使用张数
+ * 思路：由于每个面额的货币有无限张，因此尝试时每张货币需要枚举出所有可能的使用张数
  *
- * 优化点：斜率优化，消除穷举导致的复杂度升高
+ * 优化点：斜率优化，消除枚举导致的复杂度升高
  */
 public class Code012TraversalOptimize_WaysCombineMoneyUnlimited {
     /**
@@ -77,7 +77,7 @@ public class Code012TraversalOptimize_WaysCombineMoneyUnlimited {
         // 状态转移
         for (int index = money.length - 1; index >= 0; index--) {
             for (int restAim = 0; restAim <= aim; restAim++) {
-                // 斜率优化代替穷举，当前格子 = 下边格子 + 左边减去一张的格子
+                // 斜率优化代替枚举，当前格子 = 下边格子 + 左边减去一张的格子
 
                 // 举个例子，假设index=2，面额=3，restAim=10，于是根据位置依赖关系，求dp[2][10]=dp[3][10]+dp[3][7]+dp[3][4]+dp[3][1]
                 // 而进一步观察发现，左边减去一张的格子dp[2][7]也根据依赖关系=dp[3][7]+dp[3][4]+dp[3][1]

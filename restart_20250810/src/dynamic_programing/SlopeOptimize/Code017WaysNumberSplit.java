@@ -41,7 +41,7 @@ public class Code017WaysNumberSplit {
         }
 
         int ways = 0;
-        // 本次可以拆出来几？从min开始穷举所有可能性，每种可能性递归求后续的方法数，累加
+        // 本次可以拆出来几？从min开始枚举所有可能性，每种可能性递归求后续的方法数，累加
         for (int curSplit = min; curSplit <= rest; curSplit++) {
             ways += process(curSplit, rest - curSplit);
         }
