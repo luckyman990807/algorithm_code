@@ -2,7 +2,7 @@ package dynamic_programing.QuadrangleInequalityOptimize;
 
 /**
  * https://leetcode.cn/problems/super-egg-drop/description/
- * 扔蛋问题
+ * 鸡蛋掉落问题
  * 有n层楼，k枚鸡蛋，需要测试出楼层f，使得从>=f的楼层扔鸡蛋一定会碎，从f以下的楼层扔鸡蛋一定不会碎，求最小测试次数。
  *
  * 思路：
@@ -21,6 +21,7 @@ package dynamic_programing.QuadrangleInequalityOptimize;
 public class Code025DropEgg {
     /**
      * 解法一阶段：暴力递归
+     * 
      * @param k
      * @param n
      * @return
@@ -31,6 +32,7 @@ public class Code025DropEgg {
 
     /**
      * 把总共restN层楼交给restK枚鸡蛋负责，返回确定能测试出结果的最小测试次数。
+     * 
      * @param restN
      * @param restK
      * @return
@@ -61,6 +63,7 @@ public class Code025DropEgg {
 
     /**
      * 解法二阶段：动态规划
+     * 
      * @param k
      * @param n
      * @return
@@ -92,6 +95,7 @@ public class Code025DropEgg {
 
     /**
      * 解法三阶段：四边形不等式优化
+     * 
      * @param k
      * @param n
      * @return
@@ -140,7 +144,42 @@ public class Code025DropEgg {
     }
 
     /**
-     * 本题最优解
-     * 很独特的试法：dp[i][j]表示
+     * 最优解
+     * 很独特的试法：dp[i][j]表示i枚鸡蛋扔j次能从多少层楼中测试出不会碎的最大楼层。
+     * 
+     * 分析状态转移方程：
+     * 假设现在有i枚鸡蛋，j次测试机会，第一枚从第x楼扔下去，
+     * 如果碎了，那么最大不碎层一定在x下面，而剩下的i-1枚鸡蛋和j-1次测试机会，能从x下面的dp[i-1][j-1]层楼中测试出最大不碎层；
+     * 如果没碎，那么最大不碎层一定在x或x上面，而剩下的i枚鸡蛋和j-1次测试机会，能从x上面的dp[i][j-1]层楼中测试出最大不碎层。
+     * 所以，i枚鸡蛋，j次测试机会，能从下面dp[i-1][j-1]层+第x层+上面dp[i][j-1]层中测试出最大不碎层，
+     * 所以状态转移方程：dp[i][j] = dp[i-1][j-1] + 1 + dp[i][j-1]
+     * 
+     * 这道题的结果怎么求：
+     * 填充dp表，当dp[i][j]第一次大于等于n时，说明i枚鸡蛋，j次测试机会，能从n层楼中测试出最大不碎层了，所以返回j
+     * 
+     * 有个问题：
+     * dp表应该设几列呢？
+     * 不需要考虑，使用空间压缩的方式，一位数组作为一列，一直往右滚动填充即可。
      */
+    public int optimal(int k, int n) {
+        int[] dp = new int[k + 1];
+
+        // 外层循环j代表测试次数
+        for (int j = 1; j <= n; j++) {
+            // 内层循环i代表鸡蛋个数
+            for (int i = k; i > 0; i--) {
+                /** 
+                 * 这里注意！！！一定要从下往上填！！！
+                 * 原本一个格子依赖左边和左上，空间压缩后，一个格子依赖它自己和上，从下往上填可以轻松获取到依赖的格子，并写更新本格子后不会影响后面格子的计算。
+                 * 如果从上往下填，格子a更新后，后面格子b还要依赖a原本的值，可是a已经被覆盖了，就没法算b了。
+                 */
+                dp[i] = dp[i] + dp[i - 1] + 1;
+                if (dp[i] >= n) {
+                    return j;
+                }
+            }
+        }
+
+        return n;
+    }
 }
