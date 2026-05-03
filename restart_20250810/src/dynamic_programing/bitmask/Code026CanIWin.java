@@ -13,11 +13,13 @@ package dynamic_programing.bitmask;
  * 
  * 状态压缩的动态规划
  * bitmask：二进制位掩码，用一个整数的二进制的每一位，表示一个状态是否有效/是否被使用过
+ * 用于解决可变参数的类型突破了int的动态规划问题，但是也只能解决每个状态存在or不存在这种非0即1的状态，无法解决多状态，面试也不会考。
  */
 public class Code026CanIWin {
     /**
      * 阶段一解法：暴力递归
      * 提交到leetcode上会超时
+     * 时间复杂度：N!（递归找的其实就是从1到maxChoosableInteger N个数的全排列，找出所有抽取顺序）
      * 
      * @param maxChoosableInteger
      * @param desiredTotal
@@ -82,6 +84,8 @@ public class Code026CanIWin {
      * 答案是用一个整数的位信息代替数组的效果，题目规定取值范围1 <= maxChoosableInteger <= 20，而int有32位，完全可以cover
      * 
      * 提交到leetcode上会内存超限制，二维数组缓存超限制了。
+     * 时间复杂度：2^N * N（每种status只求一遍，一共有2^N种状态。每种状态求的时候需要从0到N-1遍历）
+     * 空间复杂度：2^N * total
      */
     public static boolean forceDP(int maxChoosableInteger, int desiredTotal) {
         // 题目规定，如果最开始total就是0，那么先手赢
@@ -141,6 +145,8 @@ public class Code026CanIWin {
      * 所以缓存可以只以status为key，一维数组即可。
      * 
      * 提交leetcode直接过
+     * 时间复杂度：2^N * N
+     * 空间复杂度：2^N
      * 
      * @param maxChoosableInteger
      * @param desiredTotal
