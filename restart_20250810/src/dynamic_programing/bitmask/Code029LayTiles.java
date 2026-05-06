@@ -10,8 +10,9 @@ import tixiban.class31状态压缩的动态规划.NMFiledWith12Test;
  * 实际上可以优化成3种：1、当前格子+上格子铺一块瓷砖，2、当前格子+右格子铺一块瓷砖，3、不铺
  * 为什么：因为当前格子+左格子，实际上就是左边格子的「当前格子+右格子」，当前格子+下格子，实际上就是下边格子的「当前格子+上格子」
  * 
- * 
- * 
+ * 试法：
+ * 给定一个行号和上一行的状态（每个格子铺了or没铺），返回从该行开始把剩余区域全铺完，有几种铺法
+ * 每个格子要么上面没铺只能向上铺把上面填满，要么向右铺，要么不铺等着被下一行填满
  */
 public class Code029LayTiles {
     /**
@@ -330,6 +331,7 @@ public class Code029LayTiles {
      * 阶段五解法：严格位置依赖的动态规划
      * 完全根据上一阶段傻缓存改过来的
      * 面试的时候直接用傻缓存就行，时间复杂度差不多，还好写
+     * 
      * @param m
      * @param n
      * @return
@@ -361,7 +363,7 @@ public class Code029LayTiles {
                     // curCol也依赖自己的+1或者+2，所以也是先填大的再填小的
                     for (int curCol = cols; curCol >= 0; curCol--) {
                         int ways = 0;
-                        if (curCol==cols) {
+                        if (curCol == cols) {
                             ways = dp[curStatus][(~curStatus) & ((1 << cols) - 1)][curRow + 1][0];
                         } else if ((curStatus & (1 << curCol)) != 0) {
                             ways = dp[preStatus][curStatus][curRow][curCol + 1];
@@ -393,9 +395,7 @@ public class Code029LayTiles {
             int forceBitmask = forceBitmask(m, n);
             int ways1 = NMFiledWith12Test.ways1(n, m);
             if (dp != forceBitmask || forceBitmask != ways1) {
-                System.out.println(
-                        "执行出错,m=" + m + ",n=" + n + ",dp=" + dp + ",forceBitmask="
-                                + forceBitmask + ",ways1=" + ways1);
+                System.out.println("执行出错,m=" + m + ",n=" + n + ",dp=" + dp + ",forceBitmask=" + forceBitmask + ",ways1=" + ways1);
             }
         }
         System.out.println("完美通过");
