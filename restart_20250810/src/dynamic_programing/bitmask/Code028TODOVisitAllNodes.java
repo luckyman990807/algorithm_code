@@ -1,4 +1,4 @@
-package dynamic_programing.bitmask;
+package dynamic_programing.Bitmask;
 
 public class Code028TODOVisitAllNodes {
     public int force(int[][] graph) {

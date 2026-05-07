@@ -1,4 +1,4 @@
-package dynamic_programing.bitmask;
+package dynamic_programing.Bitmask;
 
 import tixiban.class31状态压缩的动态规划.NMFiledWith12Test;
 

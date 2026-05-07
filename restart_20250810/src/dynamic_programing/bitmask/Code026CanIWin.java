@@ -1,4 +1,4 @@
-package dynamic_programing.bitmask;
+package dynamic_programing.Bitmask;
 
 /**
  * https://leetcode.cn/problems/can-i-win/description/
