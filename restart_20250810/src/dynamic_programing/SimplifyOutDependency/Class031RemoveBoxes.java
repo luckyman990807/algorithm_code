@@ -49,6 +49,11 @@ public class Class031RemoveBoxes {
     }
 
 
+    /**
+     * 阶段二解法：暴力递归剪枝
+     * @param boxes
+     * @return
+     */
     public static int forceOpt(int[] boxes) {
         return processOpt(boxes, 0, boxes.length - 1, 0);
     }
@@ -61,6 +66,7 @@ public class Class031RemoveBoxes {
             return (pre + 1) * (pre + 1);
         }
 
+        // 剪枝，如果从l开始有连续的arr[l]，那么直接并入前缀中是最优的处理，没有必要递归处理。
         while (l + 1 <= r && arr[l + 1] == arr[l]) {
             l++;
             pre++;
@@ -75,6 +81,7 @@ public class Class031RemoveBoxes {
 
             max = Math.max(max, processOpt(arr, i, r, pre + 1) + processOpt(arr, l + 1, i - 1, 0));
 
+            // 剪枝，如果从i开始有连续的arr[i]，那么只处理第一个即可，处理第一个引出的分支会有一条分支把连续的arr[i]都并入前缀，这是最优处理。而处理第二个意味着把第一个单独消掉，然后把第二个并入前缀，没有必要白白浪费掉一个。
             while (i + 1 <= r && arr[i + 1] == arr[l]) {
                 i++;
             }
@@ -84,6 +91,11 @@ public class Class031RemoveBoxes {
     }
 
 
+    /**
+     * 阶段三解法：缓存法动态规划
+     * @param boxes
+     * @return
+     */
     public static int cache(int[] boxes) {
         int[][][] cache = new int[boxes.length][boxes.length][boxes.length];
         return processCache(boxes, 0, boxes.length - 1, 0, cache);
